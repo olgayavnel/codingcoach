@@ -1,7 +1,16 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
 import MovieCard from './MovieCard';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto;
+  padding: 2em;
+  margin: 1em;
+  justify-content: space-around;
+`;
 
 const Movies = () => {
   let [data, setData] = useState([]);
@@ -18,12 +27,14 @@ const Movies = () => {
     fetchData();
   }, []);
 
+  console.log(data);
+
   return (
-    <div>
-      {data.map((item) => {
+    <Wrapper>
+      {data.slice(0, 6).map((item) => {
         return <MovieCard key={item.id} data={item} />;
       })}
-    </div>
+    </Wrapper>
   );
 };
 
